@@ -1,5 +1,5 @@
 import torch
-from net import *
+from mynet import *
 from dataload import *
 from torch import optim
 from tqdm import tqdm
@@ -8,11 +8,11 @@ import os
 
 def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = CTANet().to(device)
+    model = MyNet().to(device)
 
     # if we have the pre-trained model then fine-tune it
-    if os.path.exists('src\\CTANet\\CTANet.pth'):
-        model.load_state_dict(torch.load('src\\CTANet\\CTANet.pth'))
+    if os.path.exists('src\\MyNet\\MyNet.pth'):
+        model.load_state_dict(torch.load('src\\MyNet\\MyNet.pth'))
         print("Pre-training model loaded successfully!")
     else:
         print("No pre-training model found, start training from scratch.")
@@ -20,14 +20,14 @@ def main():
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
-    num_epoches = 400
+    num_epoches = 300
 
     min_loss = float('inf')
 
     loss_values = []
     accuracy_values = []
 
-    save_dir = 'src\\CTANet'
+    save_dir = 'src\\MyNet'
     os.makedirs(save_dir, exist_ok=True)
     log_file_path = os.path.join(save_dir, 'training_log.txt')
 
@@ -70,12 +70,12 @@ def main():
             if min_loss > avg_loss:
                 min_loss = avg_loss
                 print(f'Epoch {epoch+1}/{num_epoches}, AverageLoss: {avg_loss:.4f}, Accuracy: {epoch_accuracy:.2f}%')
-                torch.save(model.state_dict(), 'src\\CTANet\\CTANet.pth')
+                torch.save(model.state_dict(), 'src\\MyNet\\MyNet.pth')
                 print('Model saved')
             else:
                 print(f'Epoch {epoch+1}/{num_epoches}, AverageLoss: {avg_loss:.4f}, Accuracy: {epoch_accuracy:.2f}%')
 
-    save_dir = 'src\\graph'
+    save_dir = 'src\\graph(MyNet)'
     os.makedirs(save_dir, exist_ok=True)
     save_path_loss = os.path.join(save_dir, 'loss_curve.png')
     save_path_accuracy = os.path.join(save_dir, 'accuracy_curve.png')

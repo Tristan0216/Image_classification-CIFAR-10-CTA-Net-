@@ -1,13 +1,13 @@
 import torch
 from torch import optim
 from tqdm import tqdm
-from net import *
+from mynet import *
 from dataload import *
 
 def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = CTANet().to(device)
-    model.load_state_dict(torch.load('src\\CTANet\\CTANet.pth', map_location=device))
+    model = MyNet().to(device)
+    model.load_state_dict(torch.load('src\\MyNet\\MyNet.pth', map_location=device))
     model.eval()
 
     correct = 0
