@@ -20,7 +20,7 @@ def main():
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
-    num_epoches = 20
+    num_epoches = 50
 
     min_loss = float('inf')
 
@@ -31,7 +31,7 @@ def main():
     os.makedirs(save_dir, exist_ok=True)
     log_file_path = os.path.join(save_dir, 'training_log.txt')
 
-    with open(log_file_path, 'w') as log_file:
+    with open(log_file_path, 'a') as log_file:
         log_file.write("Epoch\tLoss\tAccuracy\n")
     
     for epoch in range(num_epoches):
@@ -80,7 +80,7 @@ def main():
     save_path_loss = os.path.join(save_dir, 'loss_curve.png')
     save_path_accuracy = os.path.join(save_dir, 'accuracy_curve.png')
 
-    # save the loss curves
+    # save the loss curves 
     plt.figure(figsize=(10, 6))
     plt.plot(range(len(loss_values)), loss_values, label='Average Loss')
     plt.title('Training Loss')
