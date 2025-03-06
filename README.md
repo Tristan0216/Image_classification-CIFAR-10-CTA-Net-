@@ -5,4 +5,4 @@
 同时构建卷积神经网络并在相同数据集上进行训练，并比较与CTA-Net的训练结果</br>
 CTA-Net网络测试准确率为73.73%，普通卷积测试准确率为83.98%。</br>
 * 第一次优化：</br>
-对CTA-Net进行优化，对CNN branch加深卷积提取层数，并对CNN branch和Transformers branch加入dropout防止过拟合，在训练250epoches后测试准确率能达到84.64%，训练300 epoches可以测试准确率可以稳定达到84%以上
+对CTA-Net进行优化，对CNN branch加深卷积提取层数，并对CNN branch和Transformers branch加入dropout防止过拟合，在训练250epoches后测试准确率能达到84.64%，训练300 epoches的测试准确率可以稳定达到84%以上
